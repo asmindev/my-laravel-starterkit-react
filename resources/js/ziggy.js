@@ -1,0 +1,92 @@
+const Ziggy = {
+    url: 'http:\/\/localhost:8000',
+    port: 8000,
+    defaults: {},
+    routes: {
+        'boost.browser-logs': { uri: '_boost\/browser-logs', methods: ['POST'] },
+        home: { uri: '\/', methods: ['GET', 'HEAD'] },
+        'recipients.index': { uri: 'recipients', methods: ['GET', 'HEAD'] },
+        'recipients.store': { uri: 'recipients', methods: ['POST'] },
+        'recipients.update': { uri: 'recipients\/{recipient}', methods: ['PUT', 'PATCH'], parameters: ['recipient'], bindings: { recipient: 'id' } },
+        'recipients.destroy': { uri: 'recipients\/{recipient}', methods: ['DELETE'], parameters: ['recipient'], bindings: { recipient: 'id' } },
+        'recipients.import': { uri: 'recipients\/import', methods: ['POST'] },
+        'email-templates.index': { uri: 'email-templates', methods: ['GET', 'HEAD'] },
+        'email-templates.store': { uri: 'email-templates', methods: ['POST'] },
+        'email-templates.update': { uri: 'email-templates\/{email_template}', methods: ['PUT', 'PATCH'], parameters: ['email_template'] },
+        'email-templates.destroy': { uri: 'email-templates\/{email_template}', methods: ['DELETE'], parameters: ['email_template'] },
+        'email-templates.send-test': {
+            uri: 'email-templates\/{emailTemplate}\/send-test',
+            methods: ['POST'],
+            parameters: ['emailTemplate'],
+            bindings: { emailTemplate: 'id' },
+        },
+        'campaigns.index': { uri: 'campaigns', methods: ['GET', 'HEAD'] },
+        'campaigns.create': { uri: 'campaigns\/create', methods: ['GET', 'HEAD'] },
+        'campaigns.store': { uri: 'campaigns', methods: ['POST'] },
+        'campaigns.show': { uri: 'campaigns\/{campaign}', methods: ['GET', 'HEAD'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.update': { uri: 'campaigns\/{campaign}', methods: ['PUT', 'PATCH'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.destroy': { uri: 'campaigns\/{campaign}', methods: ['DELETE'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.edit': { uri: 'campaigns\/{campaign}\/edit', methods: ['GET', 'HEAD'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.send': { uri: 'campaigns\/{campaign}\/send', methods: ['POST'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.cancel': { uri: 'campaigns\/{campaign}\/cancel', methods: ['POST'], parameters: ['campaign'], bindings: { campaign: 'id' } },
+        'campaigns.track-open': {
+            uri: 'track\/open\/{campaign}\/{recipient}',
+            methods: ['GET', 'HEAD'],
+            parameters: ['campaign', 'recipient'],
+            bindings: { campaign: 'id', recipient: 'id' },
+        },
+        'campaigns.track-click': {
+            uri: 'track\/click\/{campaign}\/{recipient}',
+            methods: ['GET', 'HEAD'],
+            parameters: ['campaign', 'recipient'],
+            bindings: { campaign: 'id', recipient: 'id' },
+        },
+        'form-templates.index': { uri: 'form-templates', methods: ['GET', 'HEAD'] },
+        'form-templates.store': { uri: 'form-templates', methods: ['POST'] },
+        'form-templates.show': { uri: 'form-templates\/{form_template}', methods: ['GET', 'HEAD'], parameters: ['form_template'] },
+        'form-templates.update': { uri: 'form-templates\/{form_template}', methods: ['PUT', 'PATCH'], parameters: ['form_template'] },
+        'form-templates.destroy': { uri: 'form-templates\/{form_template}', methods: ['DELETE'], parameters: ['form_template'] },
+        'form-templates.preview': {
+            uri: 'form-templates\/{formTemplate}\/preview',
+            methods: ['GET', 'HEAD'],
+            parameters: ['formTemplate'],
+            bindings: { formTemplate: 'id' },
+        },
+        'form-templates.toggle-status': {
+            uri: 'form-templates\/{formTemplate}\/toggle-status',
+            methods: ['POST'],
+            parameters: ['formTemplate'],
+            bindings: { formTemplate: 'id' },
+        },
+        'form-templates.duplicate': {
+            uri: 'form-templates\/{formTemplate}\/duplicate',
+            methods: ['POST'],
+            parameters: ['formTemplate'],
+            bindings: { formTemplate: 'id' },
+        },
+        'public.phishing-page': {
+            uri: 'phishing\/template\/{template}\/{token}',
+            methods: ['GET', 'HEAD'],
+            parameters: ['template', 'token'],
+            bindings: { template: 'id' },
+        },
+        'public.capture-submission': {
+            uri: 'phishing\/capture\/{template}',
+            methods: ['POST'],
+            parameters: ['template'],
+            bindings: { template: 'id' },
+        },
+        'public.acknowledge-awareness': {
+            uri: 'phishing\/acknowledge\/{submission}',
+            methods: ['POST'],
+            parameters: ['submission'],
+            bindings: { submission: 'id' },
+        },
+        'storage.local': { uri: 'storage\/{path}', methods: ['GET', 'HEAD'], wheres: { path: '.*' }, parameters: ['path'] },
+    },
+};
+if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
+    Object.assign(Ziggy.routes, window.Ziggy.routes);
+}
+export { Ziggy };
+export default Ziggy;
