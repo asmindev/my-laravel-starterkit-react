@@ -1,6 +1,6 @@
 const Ziggy = {
-    url: 'http:\/\/localhost:8000',
-    port: 8000,
+    url: 'https:\/\/01f8a21e6e58.ngrok-free.app',
+    port: null,
     defaults: {},
     routes: {
         'boost.browser-logs': { uri: '_boost\/browser-logs', methods: ['POST'] },
