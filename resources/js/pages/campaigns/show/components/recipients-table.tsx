@@ -11,18 +11,18 @@ export default function RecipientsTable({ campaign }: { campaign: Campaign & { c
                 <TableHeader>
                     <TableRow>
                         <TableHead>Email</TableHead>
-                        <TableHead>Name</TableHead>
+                        <TableHead>Nama</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Sent At</TableHead>
+                        <TableHead>Dikirim Pada</TableHead>
                         {/* <TableHead>Opened</TableHead> */}
-                        <TableHead>Clicked</TableHead>
+                        <TableHead>Diklik</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {recipients.length === 0 ? (
                         <TableRow>
                             <TableCell colSpan={6} className="h-24 text-center">
-                                No recipients found.
+                                Tidak ada penerima ditemukan.
                             </TableCell>
                         </TableRow>
                     ) : (

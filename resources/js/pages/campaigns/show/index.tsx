@@ -41,7 +41,7 @@ export default function CampaignShowPage({ campaign, stats, submissions }: Props
 
     return (
         <AppLayout>
-            <Head title={`Campaign: ${campaign.name}`} />
+            <Head title={`Kampanye: ${campaign.name}`} />
 
             <div className="container mx-auto py-8">
                 <div className="mb-4 flex items-start justify-between">
@@ -50,13 +50,13 @@ export default function CampaignShowPage({ campaign, stats, submissions }: Props
                             <h1 className="text-3xl font-bold">{campaign.name}</h1>
                             {/* status badge rendered inside CampaignInfo */}
                         </div>
-                        <p className="text-muted-foreground">Campaign details and statistics</p>
+                        <p className="text-muted-foreground">Detail kampanye dan statistik</p>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={() => setSendDialogOpen(true)}>Send Now</Button>
+                        <Button onClick={() => setSendDialogOpen(true)}>Kirim Sekarang</Button>
                         {campaign.status === 'scheduled' && (
                             <Button variant="destructive" onClick={() => setCancelDialogOpen(true)}>
-                                Cancel
+                                Batalkan
                             </Button>
                         )}
                     </div>
@@ -67,13 +67,13 @@ export default function CampaignShowPage({ campaign, stats, submissions }: Props
                 <div className="mt-6 grid gap-6 lg:grid-cols-3">
                     <div className="space-y-6 lg:col-span-2">
                         <div>
-                            <h3 className="mb-4 text-lg font-medium">Recipients</h3>
+                            <h3 className="mb-4 text-lg font-medium">Penerima</h3>
                             <RecipientsTable campaign={campaign} />
                         </div>
 
                         {submissions && submissions.length > 0 && (
                             <div>
-                                <h3 className="mb-4 text-lg font-medium">Captured Data (Phishing Submissions)</h3>
+                                <h3 className="mb-4 text-lg font-medium">Data yang Ditangkap (Pengiriman Phishing)</h3>
                                 <SubmissionsTable submissions={submissions} />
                             </div>
                         )}
@@ -90,14 +90,14 @@ export default function CampaignShowPage({ campaign, stats, submissions }: Props
             <AlertDialog open={sendDialogOpen} onOpenChange={setSendDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Send Campaign</AlertDialogTitle>
+                        <AlertDialogTitle>Kirim Kampanye</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to send this campaign? This action will start sending emails to all recipients.
+                            Apakah Anda yakin ingin mengirim kampanye ini? Tindakan ini akan mulai mengirim email ke semua penerima.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleSend}>Send Now</AlertDialogAction>
+                        <AlertDialogCancel>Batal</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleSend}>Kirim Sekarang</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -106,14 +106,14 @@ export default function CampaignShowPage({ campaign, stats, submissions }: Props
             <AlertDialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Cancel Campaign</AlertDialogTitle>
+                        <AlertDialogTitle>Batalkan Kampanye</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to cancel this scheduled campaign? This action cannot be undone.
+                            Apakah Anda yakin ingin membatalkan kampanye terjadwal ini? Tindakan ini tidak dapat dibatalkan.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>No, Keep It</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleCancel}>Yes, Cancel Campaign</AlertDialogAction>
+                        <AlertDialogCancel>Tidak, Tetap Jaga</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleCancel}>Ya, Batalkan Kampanye</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

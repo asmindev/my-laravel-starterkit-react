@@ -28,14 +28,14 @@ export default function RecipientsEditCard({
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Recipients ({selectedRecipients.length})</CardTitle>
-                    <CardDescription>Select who will receive this campaign</CardDescription>
+                    <CardTitle>Penerima ({selectedRecipients.length})</CardTitle>
+                    <CardDescription>Pilih siapa yang akan menerima kampanye ini</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                     <div className="flex items-center space-x-2">
                         <Checkbox id="select_all" checked={selectAll} onCheckedChange={toggleSelectAll} />
                         <label htmlFor="select_all" className="cursor-pointer font-medium">
-                            Select All ({recipients.length})
+                            Pilih Semua ({recipients.length})
                         </label>
                     </div>
                     <div className="max-h-96 space-y-2 overflow-y-auto border-t pt-3">
@@ -65,7 +65,7 @@ export default function RecipientsEditCard({
                     disabled={form.processing || selectedRecipients.length === 0}
                 >
                     <Send className="mr-2 h-4 w-4" />
-                    {form.processing ? 'Sending...' : 'Send Now'}
+                    {form.processing ? 'Mengirim...' : 'Kirim Sekarang'}
                 </Button>
                 <Button
                     onClick={(e) => handleSubmit(e, false)}
@@ -73,7 +73,7 @@ export default function RecipientsEditCard({
                     className="w-full"
                     disabled={form.processing || selectedRecipients.length === 0}
                 >
-                    Save as Draft
+                    Simpan sebagai Draf
                 </Button>
             </div>
         </>

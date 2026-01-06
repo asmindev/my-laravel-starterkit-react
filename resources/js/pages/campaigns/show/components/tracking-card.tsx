@@ -5,16 +5,16 @@ export default function TrackingCard({ campaign }: { campaign: any }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Tracking</CardTitle>
+                <CardTitle>Pelacakan</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
                 <div className="flex items-center justify-between">
-                    <span className="text-sm">Open Tracking</span>
-                    <Badge variant={campaign.track_open ? 'default' : 'secondary'}>{campaign.track_open ? 'Enabled' : 'Disabled'}</Badge>
+                    <span className="text-sm">Pelacakan Pembukaan</span>
+                    <Badge variant={campaign.track_open ? 'default' : 'secondary'}>{campaign.track_open ? 'Diaktifkan' : 'Dinonaktifkan'}</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                    <span className="text-sm">Click Tracking</span>
-                    <Badge variant={campaign.track_click ? 'default' : 'secondary'}>{campaign.track_click ? 'Enabled' : 'Disabled'}</Badge>
+                    <span className="text-sm">Pelacakan Klik</span>
+                    <Badge variant={campaign.track_click ? 'default' : 'secondary'}>{campaign.track_click ? 'Diaktifkan' : 'Dinonaktifkan'}</Badge>
                 </div>
             </CardContent>
         </Card>

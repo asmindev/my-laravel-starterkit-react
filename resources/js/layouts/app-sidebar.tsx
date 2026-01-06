@@ -35,38 +35,38 @@ const navigation: NavItem[] = [
         label: 'Operasional',
         children: [
             {
-                label: 'Dashboard',
+                label: 'Dasbor',
                 href: route('home'),
                 icon: LayoutDashboard,
             },
             {
-                label: 'Recipients',
+                label: 'Penerima',
                 href: '#',
                 icon: Users,
                 submenu: [
                     {
-                        label: 'All Recipients',
+                        label: 'Semua Penerima',
                         href: route('recipients.index'),
                     },
                     {
-                        label: 'Groups',
+                        label: 'Grup',
                         // href: route('recipient-groups.index'),
                         href: '#',
                     },
                 ],
             },
             {
-                label: 'Email Templates',
+                label: 'Template Email',
                 href: route('email-templates.index'),
                 icon: FolderTree,
             },
             {
-                label: 'Form Templates',
+                label: 'Template Form',
                 href: route('form-templates.index'),
                 icon: FileText,
             },
             {
-                label: 'Campaigns',
+                label: 'Kampanye',
                 href: route('campaigns.index'),
                 icon: CreditCard,
             },

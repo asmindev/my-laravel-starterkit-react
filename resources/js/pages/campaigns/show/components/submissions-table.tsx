@@ -16,9 +16,9 @@ export default function SubmissionsTable({ submissions }: { submissions: Submiss
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Recipient</TableHead>
-                        <TableHead>Submitted At</TableHead>
-                        <TableHead>IP Address</TableHead>
+                        <TableHead>Penerima</TableHead>
+                        <TableHead>Dikirim Pada</TableHead>
+                        <TableHead>Alamat IP</TableHead>
                         <TableHead>Data</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -26,7 +26,7 @@ export default function SubmissionsTable({ submissions }: { submissions: Submiss
                     {submissions.length === 0 ? (
                         <TableRow>
                             <TableCell colSpan={4} className="h-24 text-center">
-                                No submissions captured yet.
+                                Belum ada pengiriman yang ditangkap.
                             </TableCell>
                         </TableRow>
                     ) : (

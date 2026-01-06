@@ -25,10 +25,10 @@ interface Props {
 const getStatusBadge = (status: string) => {
     const variants: Record<string, { variant: any; label: string }> = {
         draft: { variant: 'secondary', label: 'Draft' },
-        scheduled: { variant: 'default', label: 'Scheduled' },
-        sending: { variant: 'default', label: 'Sending' },
-        sent: { variant: 'default', label: 'Sent' },
-        cancelled: { variant: 'destructive', label: 'Cancelled' },
+        scheduled: { variant: 'default', label: 'Terjadwal' },
+        sending: { variant: 'default', label: 'Mengirim' },
+        sent: { variant: 'default', label: 'Terkirim' },
+        cancelled: { variant: 'destructive', label: 'Dibatalkan' },
     };
 
     const config = variants[status] || variants.draft;
@@ -98,21 +98,21 @@ export default function CampaignsTable({ campaigns }: Props) {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Name</TableHead>
+                            <TableHead>Nama</TableHead>
                             <TableHead>Template</TableHead>
                             <TableHead>Status</TableHead>
-                            <TableHead className="text-center">Recipients</TableHead>
-                            <TableHead className="text-center">Sent</TableHead>
+                            <TableHead className="text-center">Penerima</TableHead>
+                            <TableHead className="text-center">Terkirim</TableHead>
                             {/* <TableHead className="text-center">Opened</TableHead> */}
-                            <TableHead className="text-center">Clicked</TableHead>
-                            <TableHead className="text-right">Actions</TableHead>
+                            <TableHead className="text-center">Diklik</TableHead>
+                            <TableHead className="text-right">Aksi</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {campaigns.data.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={8} className="h-24 text-center">
-                                    No campaigns found.
+                                    Tidak ada kampanye ditemukan.
                                 </TableCell>
                             </TableRow>
                         ) : (
@@ -208,13 +208,15 @@ export default function CampaignsTable({ campaigns }: Props) {
             <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Delete Campaign</AlertDialogTitle>
-                        <AlertDialogDescription>Are you sure you want to delete this campaign? This action cannot be undone.</AlertDialogDescription>
+                        <AlertDialogTitle>Hapus Kampanye</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Apakah Anda yakin ingin menghapus kampanye ini? Tindakan ini tidak dapat dibatalkan.
+                        </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>Batal</AlertDialogCancel>
                         <AlertDialogAction onClick={handleDelete} className="text-destructive-foreground bg-destructive hover:bg-destructive/90">
-                            Delete
+                            Hapus
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
@@ -224,14 +226,14 @@ export default function CampaignsTable({ campaigns }: Props) {
             <AlertDialog open={sendDialogOpen} onOpenChange={setSendDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Send Campaign</AlertDialogTitle>
+                        <AlertDialogTitle>Kirim Kampanye</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to send this campaign? This will start sending emails to all recipients in the background.
+                            Apakah Anda yakin ingin mengirim kampanye ini? Ini akan mulai mengirim email ke semua penerima di latar belakang.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleSend}>Send Now</AlertDialogAction>
+                        <AlertDialogCancel>Batal</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleSend}>Kirim Sekarang</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -240,15 +242,15 @@ export default function CampaignsTable({ campaigns }: Props) {
             <AlertDialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Cancel Campaign</AlertDialogTitle>
+                        <AlertDialogTitle>Batalkan Kampanye</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to cancel this scheduled campaign? This action cannot be undone.
+                            Apakah Anda yakin ingin membatalkan kampanye terjadwal ini? Tindakan ini tidak dapat dibatalkan.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>No, Keep It</AlertDialogCancel>
+                        <AlertDialogCancel>Tidak, Tetap Jaga</AlertDialogCancel>
                         <AlertDialogAction onClick={handleCancel} className="text-destructive-foreground bg-destructive hover:bg-destructive/90">
-                            Yes, Cancel Campaign
+                            Ya, Batalkan Kampanye
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

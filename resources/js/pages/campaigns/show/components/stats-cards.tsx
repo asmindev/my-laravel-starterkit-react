@@ -19,7 +19,7 @@ export default function StatsCards({ stats }: { stats: Stats }) {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Recipients</CardTitle>
+                    <CardTitle className="text-sm font-medium">Total Penerima</CardTitle>
                     <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
@@ -29,47 +29,47 @@ export default function StatsCards({ stats }: { stats: Stats }) {
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Sent</CardTitle>
+                    <CardTitle className="text-sm font-medium">Terkirim</CardTitle>
                     <Mail className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{stats.sent_count}</div>
                     <p className="text-xs text-muted-foreground">
-                        {stats.total_recipients > 0 ? `${Math.round((stats.sent_count / stats.total_recipients) * 100)}%` : '0%'} of total
+                        {stats.total_recipients > 0 ? `${Math.round((stats.sent_count / stats.total_recipients) * 100)}%` : '0%'} dari total
                     </p>
                 </CardContent>
             </Card>
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Opened</CardTitle>
+                    <CardTitle className="text-sm font-medium">Dibuka</CardTitle>
                     <MailOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{stats.opened_count}</div>
-                    <p className="text-xs text-muted-foreground">{stats.open_rate}% open rate</p>
+                    <p className="text-xs text-muted-foreground">{stats.open_rate}% tingkat buka</p>
                 </CardContent>
             </Card>
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Clicked</CardTitle>
+                    <CardTitle className="text-sm font-medium">Diklik</CardTitle>
                     <MousePointerClick className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{stats.clicked_count}</div>
-                    <p className="text-xs text-muted-foreground">{stats.click_rate}% click rate</p>
+                    <p className="text-xs text-muted-foreground">{stats.click_rate}% tingkat klik</p>
                 </CardContent>
             </Card>
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Captured</CardTitle>
+                    <CardTitle className="text-sm font-medium">Ditangkap</CardTitle>
                     <AlertTriangle className="h-4 w-4 text-destructive" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold text-destructive">{stats.submitted_count || 0}</div>
-                    <p className="text-xs text-muted-foreground">{stats.submission_rate || 0}% capture rate</p>
+                    <p className="text-xs text-muted-foreground">{stats.submission_rate || 0}% tingkat tangkap</p>
                 </CardContent>
             </Card>
         </div>

@@ -22,12 +22,12 @@ export default function CampaignCreatePage({ templates, formTemplates, recipient
 
     return (
         <AppLayout>
-            <Head title="Create Campaign" />
+            <Head title="Buat Kampanye" />
 
             <div className="container mx-auto py-8">
                 <div className="mb-6">
-                    <h1 className="text-3xl font-bold">Create New Campaign</h1>
-                    <p className="text-muted-foreground">Set up your email campaign</p>
+                    <h1 className="text-3xl font-bold">Buat Kampanye Baru</h1>
+                    <p className="text-muted-foreground">Siapkan kampanye email Anda</p>
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-3">

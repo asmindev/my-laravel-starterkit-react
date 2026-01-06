@@ -18,13 +18,13 @@ export default function CampaignIndexPage({ campaigns, filters }: Props) {
 
     return (
         <AppLayout>
-            <Head title="Campaigns" />
+            <Head title="Kampanye" />
 
             <div className="container mx-auto py-8">
                 <div className="mb-6 flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold">Campaigns</h1>
-                        <p className="text-muted-foreground">Manage your email campaigns</p>
+                        <h1 className="text-3xl font-bold">Kampanye</h1>
+                        <p className="text-muted-foreground">Kelola kampanye email Anda</p>
                     </div>
                     <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} onSearch={handleSearch} onClear={handleClear} />
                 </div>

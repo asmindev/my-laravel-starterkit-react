@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -16,27 +15,19 @@ interface Props {
     handleSubmit: (e: React.FormEvent, sendNow?: boolean) => void;
 }
 
-export default function RecipientsCard({
-    form,
-    recipients,
-    selectedRecipients,
-    selectAll,
-    toggleRecipient,
-    toggleSelectAll,
-    handleSubmit,
-}: Props) {
+export default function RecipientsCard({ form, recipients, selectedRecipients, selectAll, toggleRecipient, toggleSelectAll, handleSubmit }: Props) {
     return (
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Recipients ({selectedRecipients.length})</CardTitle>
-                    <CardDescription>Select who will receive this campaign</CardDescription>
+                    <CardTitle>Penerima ({selectedRecipients.length})</CardTitle>
+                    <CardDescription>Pilih siapa yang akan menerima kampanye ini</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                     <div className="flex items-center space-x-2">
                         <Checkbox id="select_all" checked={selectAll} onCheckedChange={toggleSelectAll} />
                         <label htmlFor="select_all" className="cursor-pointer font-medium">
-                            Select All ({recipients.length})
+                            Pilih Semua ({recipients.length})
                         </label>
                     </div>
                     <div className="max-h-96 space-y-2 overflow-y-auto border-t pt-3">
@@ -61,10 +52,15 @@ export default function RecipientsCard({
             <div className="mt-4 space-y-2">
                 <Button onClick={(e) => handleSubmit(e, true)} className="w-full" disabled={form.processing || selectedRecipients.length === 0}>
                     <Send className="mr-2 h-4 w-4" />
-                    {form.processing ? 'Sending...' : 'Send Now'}
+                    {form.processing ? 'Mengirim...' : 'Kirim Sekarang'}
                 </Button>
-                <Button onClick={(e) => handleSubmit(e, false)} variant="outline" className="w-full" disabled={form.processing || selectedRecipients.length === 0}>
-                    Save as Draft
+                <Button
+                    onClick={(e) => handleSubmit(e, false)}
+                    variant="outline"
+                    className="w-full"
+                    disabled={form.processing || selectedRecipients.length === 0}
+                >
+                    Simpan sebagai Draf
                 </Button>
             </div>
         </>

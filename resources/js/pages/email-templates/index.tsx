@@ -79,7 +79,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
     };
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this template?')) {
+        if (confirm('Apakah Anda yakin ingin menghapus template ini?')) {
             router.delete(route('email-templates.destroy', id));
         }
     };
@@ -113,17 +113,17 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
     };
 
     return (
-        <AppLayout breadcrumbs={[{ label: 'Dashboard', href: route('home') }, { label: 'Email Templates' }]}>
-            <Head title="Email Templates" />
+        <AppLayout breadcrumbs={[{ label: 'Dashboard', href: route('home') }, { label: 'Template Email' }]}>
+            <Head title="Template Email" />
 
             <div className="mb-6 flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold">Email Templates</h1>
-                    <p className="text-muted-foreground">Manage your reusable email templates</p>
+                    <h1 className="text-3xl font-bold">Template Email</h1>
+                    <p className="text-muted-foreground">Kelola template email yang dapat digunakan ulang</p>
                 </div>
                 <Button onClick={() => setIsCreateOpen(true)}>
                     <Plus className="mr-2 h-4 w-4" />
-                    Create Template
+                    Buat Template
                 </Button>
             </div>
 
@@ -133,13 +133,13 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                         <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             type="text"
-                            placeholder="Search by name or subject..."
+                            placeholder="Cari berdasarkan nama atau subjek..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="pl-9"
                         />
                     </div>
-                    <Button type="submit">Search</Button>
+                    <Button type="submit">Cari</Button>
                     {filters.search && (
                         <Button
                             type="button"
@@ -149,7 +149,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                 router.get(route('email-templates.index'));
                             }}
                         >
-                            Clear
+                            Hapus
                         </Button>
                     )}
                 </div>
@@ -159,9 +159,9 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Subject</TableHead>
-                            <TableHead>Created At</TableHead>
+                            <TableHead>Nama</TableHead>
+                            <TableHead>Subjek</TableHead>
+                            <TableHead>Dibuat Pada</TableHead>
                             <TableHead className="w-[70px]"></TableHead>
                         </TableRow>
                     </TableHeader>
@@ -169,7 +169,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                         {templates.data.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={4} className="py-8 text-center">
-                                    No templates found
+                                    Tidak ada template ditemukan
                                 </TableCell>
                             </TableRow>
                         ) : (
@@ -188,11 +188,11 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuItem onClick={() => handlePreview(template)}>
                                                     <Eye className="mr-2 h-4 w-4" />
-                                                    Preview
+                                                    Pratinjau
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleTestSend(template)}>
                                                     <Send className="mr-2 h-4 w-4" />
-                                                    Test Send
+                                                    Kirim Tes
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleEdit(template)}>
                                                     <Pencil className="mr-2 h-4 w-4" />
@@ -200,7 +200,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleDelete(template.id)} className="text-destructive">
                                                     <Trash2 className="mr-2 h-4 w-4" />
-                                                    Delete
+                                                    Hapus
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
@@ -230,15 +230,15 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
 
             {/* Create Dialog */}
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-                <DialogContent className="max-w-3xl">
+                <DialogContent className="min-w-3xl">
                     <form onSubmit={handleCreate}>
                         <DialogHeader>
-                            <DialogTitle>Create Email Template</DialogTitle>
-                            <DialogDescription>Create a new reusable email template</DialogDescription>
+                            <DialogTitle>Buat Template Email</DialogTitle>
+                            <DialogDescription>Buat template email baru yang dapat digunakan ulang</DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="create-name">Template Name *</Label>
+                                <Label htmlFor="create-name">Nama Template *</Label>
                                 <Input
                                     id="create-name"
                                     type="text"
@@ -249,7 +249,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                 {createForm.errors.name && <p className="text-sm text-destructive">{createForm.errors.name}</p>}
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="create-subject">Email Subject *</Label>
+                                <Label htmlFor="create-subject">Subjek Email *</Label>
                                 <Input
                                     id="create-subject"
                                     type="text"
@@ -260,7 +260,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                 {createForm.errors.subject && <p className="text-sm text-destructive">{createForm.errors.subject}</p>}
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="create-body">HTML Body *</Label>
+                                <Label htmlFor="create-body">Body HTML *</Label>
                                 <Textarea
                                     id="create-body"
                                     value={createForm.data.html_body}
@@ -274,10 +274,10 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>
-                                Cancel
+                                Batal
                             </Button>
                             <Button type="submit" disabled={createForm.processing}>
-                                {createForm.processing ? 'Creating...' : 'Create Template'}
+                                {createForm.processing ? 'Membuat...' : 'Buat Template'}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -289,12 +289,12 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                 <DialogContent className="max-w-3xl">
                     <form onSubmit={handleUpdate}>
                         <DialogHeader>
-                            <DialogTitle>Edit Email Template</DialogTitle>
-                            <DialogDescription>Update template information</DialogDescription>
+                            <DialogTitle>Edit Template Email</DialogTitle>
+                            <DialogDescription>Perbarui informasi template</DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="edit-name">Template Name *</Label>
+                                <Label htmlFor="edit-name">Nama Template *</Label>
                                 <Input
                                     id="edit-name"
                                     type="text"
@@ -305,7 +305,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                 {editForm.errors.name && <p className="text-sm text-destructive">{editForm.errors.name}</p>}
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="edit-subject">Email Subject *</Label>
+                                <Label htmlFor="edit-subject">Subjek Email *</Label>
                                 <Input
                                     id="edit-subject"
                                     type="text"
@@ -316,7 +316,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                                 {editForm.errors.subject && <p className="text-sm text-destructive">{editForm.errors.subject}</p>}
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="edit-body">HTML Body *</Label>
+                                <Label htmlFor="edit-body">Body HTML *</Label>
                                 <Textarea
                                     id="edit-body"
                                     value={editForm.data.html_body}
@@ -330,10 +330,10 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setIsEditOpen(false)}>
-                                Cancel
+                                Batal
                             </Button>
                             <Button type="submit" disabled={editForm.processing}>
-                                {editForm.processing ? 'Updating...' : 'Update Template'}
+                                {editForm.processing ? 'Memperbarui...' : 'Perbarui Template'}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -344,8 +344,8 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
             <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                 <DialogContent className="max-w-4xl">
                     <DialogHeader>
-                        <DialogTitle>Preview: {previewTemplate?.name}</DialogTitle>
-                        <DialogDescription>Subject: {previewTemplate?.subject}</DialogDescription>
+                        <DialogTitle>Pratinjau: {previewTemplate?.name}</DialogTitle>
+                        <DialogDescription>Subjek: {previewTemplate?.subject}</DialogDescription>
                     </DialogHeader>
                     <div className="max-h-[500px] overflow-y-auto rounded-lg border p-4">
                         <div
@@ -355,7 +355,7 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                         />
                     </div>
                     <DialogFooter>
-                        <Button onClick={() => setIsPreviewOpen(false)}>Close</Button>
+                        <Button onClick={() => setIsPreviewOpen(false)}>Tutup</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -365,33 +365,33 @@ export default function EmailTemplateIndex({ templates, filters }: Props) {
                 <DialogContent>
                     <form onSubmit={handleSendTest}>
                         <DialogHeader>
-                            <DialogTitle>Send Test Email</DialogTitle>
-                            <DialogDescription>Send a test email to verify the template</DialogDescription>
+                            <DialogTitle>Kirim Email Tes</DialogTitle>
+                            <DialogDescription>Kirim email tes untuk memverifikasi template</DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="test-email">Your Email *</Label>
+                                <Label htmlFor="test-email">Email Anda *</Label>
                                 <Input
                                     id="test-email"
                                     type="email"
                                     value={testSendForm.data.email}
                                     onChange={(e) => testSendForm.setData('email', e.target.value)}
-                                    placeholder="your@email.com"
+                                    placeholder="emailanda@domain.com"
                                     required
                                 />
                                 {testSendForm.errors.email && <p className="text-sm text-destructive">{testSendForm.errors.email}</p>}
                             </div>
                             <div className="text-sm text-muted-foreground">
                                 <p>Template: {testSendTemplate?.name}</p>
-                                <p>Subject: [TEST] {testSendTemplate?.subject}</p>
+                                <p>Subjek: [TES] {testSendTemplate?.subject}</p>
                             </div>
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setIsTestSendOpen(false)}>
-                                Cancel
+                                Batal
                             </Button>
                             <Button type="submit" disabled={testSendForm.processing}>
-                                {testSendForm.processing ? 'Sending...' : 'Send Test'}
+                                {testSendForm.processing ? 'Mengirim...' : 'Kirim Tes'}
                             </Button>
                         </DialogFooter>
                     </form>

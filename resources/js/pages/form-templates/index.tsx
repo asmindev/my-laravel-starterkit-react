@@ -94,7 +94,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
     };
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this template? This action cannot be undone.')) {
+        if (confirm('Apakah Anda yakin ingin menghapus template ini? Tindakan ini tidak dapat dibatalkan.')) {
             router.delete(route('form-templates.destroy', id));
         }
     };
@@ -119,18 +119,18 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
 
     return (
         <AppLayout>
-            <Head title="Form Templates" />
+            <Head title="Template Form" />
 
             <div className="space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold">Form Templates</h1>
-                        <p className="mt-1 text-muted-foreground">Manage phishing simulation form templates</p>
+                        <h1 className="text-3xl font-bold">Template Form</h1>
+                        <p className="mt-1 text-muted-foreground">Kelola template form simulasi phishing</p>
                     </div>
                     <Button onClick={() => setIsCreateOpen(true)}>
                         <Plus className="mr-2 h-4 w-4" />
-                        Create Template
+                        Buat Template
                     </Button>
                 </div>
 
@@ -140,7 +140,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                         <div className="relative">
                             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                             <Input
-                                placeholder="Search templates..."
+                                placeholder="Cari template..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="pl-10"
@@ -149,10 +149,12 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                     </form>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline">Status: {filters.status || 'All'}</Button>
+                            <Button variant="outline">
+                                Status: {filters.status === 'active' ? 'Aktif' : filters.status === 'inactive' ? 'Tidak Aktif' : 'Semua'}
+                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuItem onClick={() => router.get(route('form-templates.index'))}>All</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => router.get(route('form-templates.index'))}>Semua</DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() =>
                                     router.get(route('form-templates.index'), {
@@ -160,7 +162,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                     })
                                 }
                             >
-                                Active
+                                Aktif
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() =>
@@ -169,7 +171,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                     })
                                 }
                             >
-                                Inactive
+                                Tidak Aktif
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -180,20 +182,20 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Type</TableHead>
+                                <TableHead>Nama</TableHead>
+                                <TableHead>Deskripsi</TableHead>
+                                <TableHead>Tipe</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead>Submissions</TableHead>
-                                <TableHead>Created</TableHead>
-                                <TableHead className="w-[70px]"></TableHead>
+                                <TableHead>Dibuat</TableHead>
+                                <TableHead className="w-17.5"></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {templates.data.length === 0 ? (
                                 <TableRow>
                                     <TableCell colSpan={7} className="text-center text-muted-foreground">
-                                        No templates found.
+                                        Tidak ada template ditemukan.
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -205,10 +207,10 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                         <TableCell>
                                             {template.is_active ? (
                                                 <Badge variant="default" className="bg-green-500">
-                                                    Active
+                                                    Aktif
                                                 </Badge>
                                             ) : (
-                                                <Badge variant="secondary">Inactive</Badge>
+                                                <Badge variant="secondary">Tidak Aktif</Badge>
                                             )}
                                         </TableCell>
                                         <TableCell>{template.submissions_count || 0}</TableCell>
@@ -223,7 +225,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuItem onClick={() => handlePreview(template)}>
                                                         <Eye className="mr-2 h-4 w-4" />
-                                                        Preview
+                                                        Pratinjau
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem onClick={() => handleEdit(template)}>
                                                         <Pencil className="mr-2 h-4 w-4" />
@@ -231,15 +233,15 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem onClick={() => handleToggleStatus(template.id)}>
                                                         <Power className="mr-2 h-4 w-4" />
-                                                        {template.is_active ? 'Deactivate' : 'Activate'}
+                                                        {template.is_active ? 'Nonaktifkan' : 'Aktifkan'}
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem onClick={() => handleDuplicate(template.id)}>
                                                         <Copy className="mr-2 h-4 w-4" />
-                                                        Duplicate
+                                                        Duplikat
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem onClick={() => handleDelete(template.id)} className="text-destructive">
                                                         <Trash2 className="mr-2 h-4 w-4" />
-                                                        Delete
+                                                        Hapus
                                                     </DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
@@ -255,7 +257,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                 {templates.last_page > 1 && (
                     <div className="flex items-center justify-between">
                         <p className="text-sm text-muted-foreground">
-                            Showing {templates.from} to {templates.to} of {templates.total} templates
+                            Menampilkan {templates.from} sampai {templates.to} dari {templates.total} template
                         </p>
                         <div className="flex gap-2">
                             {templates.links.map((link, index) => (
@@ -277,59 +279,57 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
 
             {/* Create Dialog */}
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-                <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
+                <DialogContent className="max-h-[90vh] max-w-4xl min-w-1/2 overflow-y-auto">
                     <DialogHeader>
-                        <DialogTitle>Create Form Template</DialogTitle>
-                        <DialogDescription>
-                            Create a new phishing simulation form template. Paste the HTML source code from the target website.
-                        </DialogDescription>
+                        <DialogTitle>Buat Template Form</DialogTitle>
+                        <DialogDescription>Buat template form simulasi phishing baru. Tempel kode sumber HTML dari situs target.</DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleCreate}>
                         <div className="space-y-4">
                             <div>
-                                <Label htmlFor="name">Template Name *</Label>
+                                <Label htmlFor="name">Nama Template *</Label>
                                 <Input
                                     id="name"
                                     value={createForm.data.name}
                                     onChange={(e) => createForm.setData('name', e.target.value)}
-                                    placeholder="e.g., Facebook Login Clone"
+                                    placeholder="contoh: Klon Login Facebook"
                                     required
                                 />
                                 {createForm.errors.name && <p className="mt-1 text-sm text-destructive">{createForm.errors.name}</p>}
                             </div>
 
                             <div>
-                                <Label htmlFor="description">Description</Label>
+                                <Label htmlFor="description">Deskripsi</Label>
                                 <Textarea
                                     id="description"
                                     value={createForm.data.description}
                                     onChange={(e) => createForm.setData('description', e.target.value)}
-                                    placeholder="Brief description of this template"
+                                    placeholder="Deskripsi singkat template ini"
                                     rows={2}
                                 />
                             </div>
 
                             <div>
-                                <Label htmlFor="target_url">Target URL (Optional)</Label>
+                                <Label htmlFor="target_url">URL Target (Opsional)</Label>
                                 <Input
                                     id="target_url"
                                     type="url"
                                     value={createForm.data.target_url}
                                     onChange={(e) => createForm.setData('target_url', e.target.value)}
-                                    placeholder="https://example.com (for loading external assets)"
+                                    placeholder="https://contoh.com (untuk memuat aset eksternal)"
                                 />
                                 <p className="mt-1 text-xs text-muted-foreground">
-                                    If provided, a &lt;base&gt; tag will be added to load CSS/images from the original site.
+                                    Jika disediakan, tag &lt;base&gt; akan ditambahkan untuk memuat CSS/gambar dari situs asli.
                                 </p>
                             </div>
 
                             <div>
-                                <Label htmlFor="html_content">HTML Content *</Label>
+                                <Label htmlFor="html_content">Konten HTML *</Label>
                                 <Textarea
                                     id="html_content"
                                     value={createForm.data.html_content}
                                     onChange={(e) => createForm.setData('html_content', e.target.value)}
-                                    placeholder="Paste the full HTML source code here..."
+                                    placeholder="Tempel kode sumber HTML lengkap di sini..."
                                     rows={12}
                                     className="font-mono text-xs"
                                     required
@@ -337,7 +337,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                 {createForm.errors.html_content && <p className="mt-1 text-sm text-destructive">{createForm.errors.html_content}</p>}
                                 <p className="mt-1 text-xs text-muted-foreground">
                                     <Code className="mr-1 inline h-3 w-3" />
-                                    Form actions will be automatically replaced to capture submissions.
+                                    Aksi form akan otomatis diganti untuk menangkap submissions.
                                 </p>
                             </div>
 
@@ -350,17 +350,17 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                     className="rounded"
                                 />
                                 <Label htmlFor="is_active" className="font-normal">
-                                    Active (can be used in campaigns)
+                                    Aktif (dapat digunakan dalam kampanye)
                                 </Label>
                             </div>
                         </div>
 
                         <DialogFooter className="mt-6">
                             <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>
-                                Cancel
+                                Batal
                             </Button>
                             <Button type="submit" disabled={createForm.processing}>
-                                {createForm.processing ? 'Creating...' : 'Create Template'}
+                                {createForm.processing ? 'Membuat...' : 'Buat Template'}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -371,13 +371,13 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
             <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
                 <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
                     <DialogHeader>
-                        <DialogTitle>Edit Form Template</DialogTitle>
-                        <DialogDescription>Update the form template details and HTML content.</DialogDescription>
+                        <DialogTitle>Edit Template Form</DialogTitle>
+                        <DialogDescription>Perbarui detail template form dan konten HTML.</DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleUpdate}>
                         <div className="space-y-4">
                             <div>
-                                <Label htmlFor="edit_name">Template Name *</Label>
+                                <Label htmlFor="edit_name">Nama Template *</Label>
                                 <Input
                                     id="edit_name"
                                     value={editForm.data.name}
@@ -388,7 +388,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                             </div>
 
                             <div>
-                                <Label htmlFor="edit_description">Description</Label>
+                                <Label htmlFor="edit_description">Deskripsi</Label>
                                 <Textarea
                                     id="edit_description"
                                     value={editForm.data.description}
@@ -398,7 +398,7 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                             </div>
 
                             <div>
-                                <Label htmlFor="edit_target_url">Target URL</Label>
+                                <Label htmlFor="edit_target_url">URL Target</Label>
                                 <Input
                                     id="edit_target_url"
                                     type="url"
@@ -408,11 +408,11 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                             </div>
 
                             <div>
-                                <Label htmlFor="edit_html_content">HTML Content *</Label>
+                                <Label htmlFor="edit_html_content">Konten HTML *</Label>
                                 <Textarea
                                     id="edit_html_content"
                                     value={editForm.data.html_content}
-                                    onChange={(e) => editForm.setData('html_content', e.target.value)}
+                                    onChange={(e) => editForm.setData('edit_html_content', e.target.value)}
                                     rows={12}
                                     className="font-mono text-xs"
                                     required
@@ -429,17 +429,17 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
                                     className="rounded"
                                 />
                                 <Label htmlFor="edit_is_active" className="font-normal">
-                                    Active
+                                    Aktif
                                 </Label>
                             </div>
                         </div>
 
                         <DialogFooter className="mt-6">
                             <Button type="button" variant="outline" onClick={() => setIsEditOpen(false)}>
-                                Cancel
+                                Batal
                             </Button>
                             <Button type="submit" disabled={editForm.processing}>
-                                {editForm.processing ? 'Updating...' : 'Update Template'}
+                                {editForm.processing ? 'Memperbarui...' : 'Perbarui Template'}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -450,16 +450,16 @@ export default function FormTemplateIndex({ templates, filters }: Props) {
             <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                 <DialogContent className="max-h-[90vh] max-w-6xl">
                     <DialogHeader>
-                        <DialogTitle>Template Preview</DialogTitle>
-                        <DialogDescription>Preview how this template will appear to recipients.</DialogDescription>
+                        <DialogTitle>Pratinjau Template</DialogTitle>
+                        <DialogDescription>Pratinjau bagaimana template ini akan muncul untuk penerima.</DialogDescription>
                     </DialogHeader>
                     {previewTemplate && (
                         <div className="overflow-hidden rounded-lg border">
-                            <iframe src={route('form-templates.preview', previewTemplate.id)} className="h-[600px] w-full" title="Template Preview" />
+                            <iframe src={route('form-templates.preview', previewTemplate.id)} className="h-150 w-full" title="Template Preview" />
                         </div>
                     )}
                     <DialogFooter>
-                        <Button onClick={() => setIsPreviewOpen(false)}>Close</Button>
+                        <Button onClick={() => setIsPreviewOpen(false)}>Tutup</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

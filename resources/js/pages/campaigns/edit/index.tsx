@@ -27,8 +27,8 @@ export default function CampaignEditPage({ campaign, templates, formTemplates, r
 
             <div className="container mx-auto py-8">
                 <div className="mb-6">
-                    <h1 className="text-3xl font-bold">Edit Campaign</h1>
-                    <p className="text-muted-foreground">Update campaign details</p>
+                    <h1 className="text-3xl font-bold">Edit Kampanye</h1>
+                    <p className="text-muted-foreground">Perbarui detail kampanye</p>
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-3">

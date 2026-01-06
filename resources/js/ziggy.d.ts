@@ -2,6 +2,12 @@
 declare module 'ziggy-js' {
   interface RouteList {
     "boost.browser-logs": [],
+    "login": [],
+    "login.store": [],
+    "logout": [],
+    "password.confirm": [],
+    "password.confirmation": [],
+    "password.confirm.store": [],
     "home": [],
     "recipients.index": [],
     "recipients.store": [],
@@ -86,30 +92,6 @@ declare module 'ziggy-js' {
             "binding": "id"
         }
     ],
-    "campaigns.track-open": [
-        {
-            "name": "campaign",
-            "required": true,
-            "binding": "id"
-        },
-        {
-            "name": "recipient",
-            "required": true,
-            "binding": "id"
-        }
-    ],
-    "campaigns.track-click": [
-        {
-            "name": "campaign",
-            "required": true,
-            "binding": "id"
-        },
-        {
-            "name": "recipient",
-            "required": true,
-            "binding": "id"
-        }
-    ],
     "form-templates.index": [],
     "form-templates.store": [],
     "form-templates.show": [
@@ -147,6 +129,30 @@ declare module 'ziggy-js' {
     "form-templates.duplicate": [
         {
             "name": "formTemplate",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "campaigns.track-open": [
+        {
+            "name": "campaign",
+            "required": true,
+            "binding": "id"
+        },
+        {
+            "name": "recipient",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "campaigns.track-click": [
+        {
+            "name": "campaign",
+            "required": true,
+            "binding": "id"
+        },
+        {
+            "name": "recipient",
             "required": true,
             "binding": "id"
         }
