@@ -14,7 +14,7 @@ export default function RecipientsTable({ campaign }: { campaign: Campaign & { c
                         <TableHead>Nama</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Dikirim Pada</TableHead>
-                        {/* <TableHead>Opened</TableHead> */}
+                        <TableHead>Opened</TableHead>
                         <TableHead>Diklik</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -32,7 +32,7 @@ export default function RecipientsTable({ campaign }: { campaign: Campaign & { c
                                 <TableCell>{cr.recipient?.name}</TableCell>
                                 <TableCell>{cr.status}</TableCell>
                                 <TableCell>{cr.sent_at ? format(new Date(cr.sent_at), 'MMM dd, yyyy HH:mm') : '-'}</TableCell>
-                                {/* <TableCell>{cr.opened_at ? '✓' : '-'}</TableCell> */}
+                                <TableCell>{cr.opened_at ? '✓' : '-'}</TableCell>
                                 <TableCell>{cr.clicked_at ? '✓' : '-'}</TableCell>
                             </TableRow>
                         ))
