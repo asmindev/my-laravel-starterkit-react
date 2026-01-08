@@ -3,11 +3,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { route } from 'ziggy-js';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+    const { name } = usePage().props as unknown as { name: string };
     const { data, setData, post, processing, errors } = useForm({
         email: '',
         password: '',
@@ -26,7 +27,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     <form onSubmit={submit} className="p-6 md:p-8">
                         <FieldGroup>
                             <div className="flex flex-col items-center gap-2 text-center">
-                                <h1 className="text-2xl font-bold">Selamat Datang Kembali</h1>
+                                <h1 className="text-2xl font-bold">{name}</h1>
                                 <p className="text-balance text-muted-foreground">Masuk ke akun Anda</p>
                             </div>
                             <Field>

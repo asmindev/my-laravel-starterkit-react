@@ -85,7 +85,7 @@ interface AuthUser {
 }
 
 export function AppSidebar({ activePath }: AdminSidebarProps) {
-    const { auth } = usePage().props as { auth?: { user: AuthUser } };
+    const { auth, name } = usePage().props as unknown as { auth?: { user: AuthUser }; name: string };
     const { state } = useSidebar();
     const getPathFromUrl = (url: string) => {
         try {
@@ -153,7 +153,7 @@ export function AppSidebar({ activePath }: AdminSidebarProps) {
                                 <GalleryVerticalEnd className="size-5" />
                             </div>
                             <div>
-                                <p className="text-sm font-semibold">Notaris</p>
+                                <p className="text-sm font-semibold">{name}</p>
                                 <p className="text-xs">Admin</p>
                             </div>
                         </div>
