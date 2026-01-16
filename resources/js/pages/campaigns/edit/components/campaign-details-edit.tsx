@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { EmailTemplate } from '@/types';
-import type { UseFormReturn } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 interface FormTemplate {
     id: number;
@@ -15,7 +15,7 @@ interface FormTemplate {
 interface Props {
     templates: EmailTemplate[];
     formTemplates?: FormTemplate[];
-    form: UseFormReturn<any>;
+    form: ReturnType<typeof useForm<any>>;
 }
 
 export default function CampaignDetailsEdit({ templates, formTemplates, form }: Props) {
@@ -79,7 +79,7 @@ export default function CampaignDetailsEdit({ templates, formTemplates, form }: 
                     </div>
                 )}
 
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                     <Label htmlFor="scheduled_at">Jadwalkan Pengiriman (Opsional)</Label>
                     <Input
                         id="scheduled_at"
@@ -89,7 +89,7 @@ export default function CampaignDetailsEdit({ templates, formTemplates, form }: 
                     />
                     <p className="text-xs text-muted-foreground">Biarkan kosong untuk mempertahankan jadwal saat ini atau simpan sebagai draf</p>
                     {form.errors.scheduled_at && <p className="text-sm text-destructive">{form.errors.scheduled_at}</p>}
-                </div>
+                </div> */}
 
                 <div className="space-y-3 rounded-lg border p-4">
                     <Label>Opsi Pelacakan</Label>

@@ -19,25 +19,25 @@ export default function SearchBar({ searchQuery, setSearchQuery, onSearch, onCle
                     <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         type="text"
-                        placeholder="Search campaigns..."
+                        placeholder="Cari kampanye..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-9"
                     />
                 </div>
-                <Button type="submit">Search</Button>
+                <Button type="submit">Cari</Button>
             </form>
 
             {searchQuery && (
                 <Button type="button" variant="outline" onClick={onClear}>
-                    Clear
+                    Bersihkan
                 </Button>
             )}
 
             <Button asChild>
                 <Link href={route('campaigns.create')}>
                     <Plus className="mr-2 h-4 w-4" />
-                    Create Campaign
+                    Buat Kampanye
                 </Link>
             </Button>
         </div>

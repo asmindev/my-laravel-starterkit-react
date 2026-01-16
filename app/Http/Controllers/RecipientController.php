@@ -22,7 +22,7 @@ class RecipientController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('recipients/index', [
+        return Inertia::render('recipients/page', [
             'recipients' => $recipients,
             'filters' => $request->only(['search']),
         ]);

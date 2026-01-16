@@ -72,8 +72,9 @@ class FormTemplate extends Model
         $html = preg_replace('/(<form[^>]*>)/i', '$1' . $tokenField, $html);
 
         // Add warning banner at the top
-        $warningBanner = $this->getWarningBanner();
-        $html = preg_replace('/(<body[^>]*>)/i', '$1' . $warningBanner, $html);
+        // $warningBanner = $this->getWarningBanner();
+        // $html = preg_replace('/(<body[^>]*>)/i', '$1' . $warningBanner, $html);
+        $html = preg_replace('/(<body[^>]*>)/i', '$1', $html);
 
         return $html;
     }

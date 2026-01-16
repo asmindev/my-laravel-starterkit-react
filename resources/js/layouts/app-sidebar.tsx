@@ -41,19 +41,8 @@ const navigation: NavItem[] = [
             },
             {
                 label: 'Penerima',
-                href: '#',
+                href: route('recipients.index'),
                 icon: Users,
-                submenu: [
-                    {
-                        label: 'Semua Penerima',
-                        href: route('recipients.index'),
-                    },
-                    {
-                        label: 'Grup',
-                        // href: route('recipient-groups.index'),
-                        href: '#',
-                    },
-                ],
             },
             {
                 label: 'Template Email',

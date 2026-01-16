@@ -19,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->validateCsrfTokens(except: [
-            'phishing/capture/*',
+            'account-security/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

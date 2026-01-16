@@ -41,11 +41,11 @@ Route::get('track/open/{campaign}/{recipient}', [CampaignTrackingController::cla
 Route::get('track/click/{campaign}/{recipient}', [CampaignTrackingController::class, 'trackClick'])->name('campaigns.track-click');
 
 // Public Phishing Simulation Routes (no auth - accessible by email recipients)
-Route::prefix('phishing')->name('public.')->group(function () {
-    Route::get('template/{template}/{token}', [PhishingSimulationController::class, 'show'])
+Route::prefix('account-security')->name('public.')->group(function () {
+    Route::get('verify/{template}/{token}', [PhishingSimulationController::class, 'show'])
         ->name('phishing-page');
-    Route::post('capture/{template}', [PhishingSimulationController::class, 'captureSubmission'])
+    Route::post('validate/{template}', [PhishingSimulationController::class, 'captureSubmission'])
         ->name('capture-submission');
-    Route::post('acknowledge/{submission}', [PhishingSimulationController::class, 'acknowledgeAwareness'])
+    Route::post('safety-check/{submission}', [PhishingSimulationController::class, 'acknowledgeAwareness'])
         ->name('acknowledge-awareness');
 });

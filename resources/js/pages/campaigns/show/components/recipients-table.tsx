@@ -14,7 +14,7 @@ export default function RecipientsTable({ campaign }: { campaign: Campaign & { c
                         <TableHead>Nama</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Dikirim Pada</TableHead>
-                        <TableHead>Opened</TableHead>
+                        <TableHead>Dibuka</TableHead>
                         <TableHead>Diklik</TableHead>
                     </TableRow>
                 </TableHeader>

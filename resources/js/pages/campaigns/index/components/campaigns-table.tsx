@@ -103,7 +103,7 @@ export default function CampaignsTable({ campaigns }: Props) {
                             <TableHead>Status</TableHead>
                             <TableHead className="text-center">Penerima</TableHead>
                             <TableHead className="text-center">Terkirim</TableHead>
-                            {/* <TableHead className="text-center">Opened</TableHead> */}
+                            <TableHead className="text-center">Dibuka</TableHead>
                             <TableHead className="text-center">Diklik</TableHead>
                             <TableHead className="text-right">Aksi</TableHead>
                         </TableRow>
@@ -123,14 +123,14 @@ export default function CampaignsTable({ campaigns }: Props) {
                                     <TableCell>{getStatusBadge(campaign.status)}</TableCell>
                                     <TableCell className="text-center">{campaign.total_recipients || 0}</TableCell>
                                     <TableCell className="text-center">{campaign.sent_count || 0}</TableCell>
-                                    {/* <TableCell className="text-center">
+                                    <TableCell className="text-center">
                                         {campaign.opened_count || 0}
-                                        {campaign.total_recipients > 0 && (
+                                        {(campaign.total_recipients || 0) > 0 && (
                                             <span className="ml-1 text-xs text-muted-foreground">
-                                                ({Math.round(((campaign.opened_count || 0) / campaign.total_recipients) * 100)}%)
+                                                ({Math.round(((campaign.opened_count || 0) / (campaign.total_recipients || 1)) * 100)}%)
                                             </span>
                                         )}
-                                    </TableCell> */}
+                                    </TableCell>
                                     <TableCell className="text-center">
                                         {campaign.clicked_count || 0}
                                         {campaign?.total_recipients > 0 && (
@@ -150,7 +150,7 @@ export default function CampaignsTable({ campaigns }: Props) {
                                                 <DropdownMenuItem asChild>
                                                     <Link href={route('campaigns.show', campaign.id)}>
                                                         <Eye className="mr-2 h-4 w-4" />
-                                                        View Details
+                                                        Lihat Detail
                                                     </Link>
                                                 </DropdownMenuItem>
                                                 {(campaign.status === 'draft' || campaign.status === 'scheduled') && (
@@ -165,18 +165,18 @@ export default function CampaignsTable({ campaigns }: Props) {
                                                     <>
                                                         <DropdownMenuItem onClick={() => openSendDialog(campaign.id)}>
                                                             <Send className="mr-2 h-4 w-4" />
-                                                            Send Now
+                                                            Kirim Sekarang
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem onClick={() => openDeleteDialog(campaign.id)} className="text-destructive">
                                                             <Trash2 className="mr-2 h-4 w-4" />
-                                                            Delete
+                                                            Hapus
                                                         </DropdownMenuItem>
                                                     </>
                                                 )}
                                                 {campaign.status === 'scheduled' && (
                                                     <DropdownMenuItem onClick={() => openCancelDialog(campaign.id)} className="text-destructive">
                                                         <XCircle className="mr-2 h-4 w-4" />
-                                                        Cancel
+                                                        Batalkan
                                                     </DropdownMenuItem>
                                                 )}
                                             </DropdownMenuContent>

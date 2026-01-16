@@ -2,11 +2,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import type { Recipient } from '@/types';
-import type { UseFormReturn } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import { Send } from 'lucide-react';
+import { useState } from 'react';
 
 interface Props {
-    form: UseFormReturn<any>;
+    form: ReturnType<typeof useForm<any>>;
     recipients: Recipient[];
     selectedRecipients: number[];
     selectAll: boolean;
@@ -24,6 +25,8 @@ export default function RecipientsEditCard({
     toggleSelectAll,
     handleSubmit,
 }: Props) {
+    const [action, setAction] = useState<'send' | 'draft' | null>(null);
+
     return (
         <>
             <Card>
@@ -60,20 +63,26 @@ export default function RecipientsEditCard({
             <div className="mt-4 space-y-2">
                 <Button
                     type="submit"
-                    onClick={(e) => handleSubmit(e, true)}
+                    onClick={(e) => {
+                        setAction('send');
+                        handleSubmit(e, true);
+                    }}
                     className="w-full"
                     disabled={form.processing || selectedRecipients.length === 0}
                 >
                     <Send className="mr-2 h-4 w-4" />
-                    {form.processing ? 'Mengirim...' : 'Kirim Sekarang'}
+                    {form.processing && action === 'send' ? 'Mengirim...' : 'Kirim Sekarang'}
                 </Button>
                 <Button
-                    onClick={(e) => handleSubmit(e, false)}
+                    onClick={(e) => {
+                        setAction('draft');
+                        handleSubmit(e, false);
+                    }}
                     variant="outline"
                     className="w-full"
                     disabled={form.processing || selectedRecipients.length === 0}
                 >
-                    Simpan sebagai Draf
+                    {form.processing && action === 'draft' ? 'Menyimpan...' : 'Simpan sebagai Draf'}
                 </Button>
             </div>
         </>

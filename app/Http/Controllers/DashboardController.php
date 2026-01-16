@@ -26,11 +26,15 @@ class DashboardController extends Controller
         // Campaign statistics
         $campaignStats = [
             'total_sent' => CampaignRecipient::where('status', 'sent')->count(),
+            'total_opened' => CampaignRecipient::whereNotNull('opened_at')->count(),
             'total_clicked' => CampaignRecipient::whereNotNull('clicked_at')->count(),
             'total_captured' => FormSubmission::count(),
         ];
 
         // Calculate rates
+        $campaignStats['open_rate'] = $campaignStats['total_sent'] > 0
+            ? round(($campaignStats['total_opened'] / $campaignStats['total_sent']) * 100, 2)
+            : 0;
         $campaignStats['click_rate'] = $campaignStats['total_sent'] > 0
             ? round(($campaignStats['total_clicked'] / $campaignStats['total_sent']) * 100, 2)
             : 0;
@@ -61,6 +65,7 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($campaign) {
                 $sent = $campaign->campaignRecipients->where('status', 'sent')->count();
+                $opened = $campaign->campaignRecipients->whereNotNull('opened_at')->count();
                 $clicked = $campaign->campaignRecipients->whereNotNull('clicked_at')->count();
                 $captured = $campaign->campaignRecipients->sum(fn($cr) => $cr->submissions->count());
 
@@ -69,8 +74,10 @@ class DashboardController extends Controller
                     'name' => $campaign->name,
                     'template_name' => $campaign->template->name ?? 'N/A',
                     'sent_count' => $sent,
+                    'opened_count' => $opened,
                     'clicked_count' => $clicked,
                     'captured_count' => $captured,
+                    'open_rate' => $sent > 0 ? round(($opened / $sent) * 100, 2) : 0,
                     'click_rate' => $sent > 0 ? round(($clicked / $sent) * 100, 2) : 0,
                     'capture_rate' => $sent > 0 ? round(($captured / $sent) * 100, 2) : 0,
                 ];
@@ -79,7 +86,7 @@ class DashboardController extends Controller
             ->take(5)
             ->values();
 
-        return Inertia::render('dashboard', [
+        return Inertia::render('dashboard/page', [
             'stats' => $stats,
             'campaignStats' => $campaignStats,
             'recentCampaigns' => $recentCampaigns,

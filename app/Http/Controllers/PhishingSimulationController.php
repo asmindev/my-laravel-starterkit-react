@@ -80,6 +80,11 @@ class PhishingSimulationController extends Controller
                 'template_id' => $template->id,
             ]);
 
+            // Check if campaign has redirect_url
+            if ($recipient->campaign->redirect_url) {
+                return redirect()->away($recipient->campaign->redirect_url);
+            }
+
             // Redirect to awareness/educational page
             return $this->showAwarenessPage($submission, $recipient->recipient->email);
         } catch (\Exception $e) {

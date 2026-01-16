@@ -23,7 +23,7 @@ class EmailTemplateController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('email-templates/index', [
+        return Inertia::render('email-templates/page', [
             'templates' => $templates,
             'filters' => $request->only(['search']),
         ]);

@@ -4,165 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ Simulasi Phishing - Edukasi Keamanan</title>
+    <title>🚨 Peringatan Keamanan Penting</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-to-br from-orange-50 to-red-50 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <!-- Header Alert -->
-        <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 text-center">
-            <div class="text-6xl mb-4">⚠️</div>
-            <h1 class="text-3xl font-bold mb-2">PERINGATAN KEAMANAN!</h1>
-            <p class="text-lg">Anda Baru Saja Menjadi Korban Simulasi Phishing</p>
-        </div>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-4 selection:bg-red-500 selection:text-white">
+    <div class="max-w-4xl w-full bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-700">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <!-- Left Side: Alert & Visuals -->
+            <div class="bg-gradient-to-br from-red-600 to-rose-700 p-8 lg:p-12 text-white flex flex-col justify-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
 
-        <!-- Content -->
-        <div class="p-8 space-y-6">
-            @if($submission)
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
-                <div class="flex items-start">
-                    <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                clip-rule="evenodd" />
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8 animate-pulse-slow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                     </div>
-                    <div class="ml-3">
-                        <h3 class="text-lg font-semibold text-yellow-800">Data Anda Telah Terekam</h3>
-                        <p class="text-yellow-700 mt-1">
-                            Ini adalah simulasi edukasi. Dalam skenario nyata, informasi login Anda akan dicuri oleh
-                            penyerang.
+
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight">Ups! Anda Terkena Phishing.</h1>
+                    <p class="text-red-100 text-lg leading-relaxed opacity-90">
+                        Jangan panik. Ini hanya simulasi edukasi dari tim keamanan IT Anda. Namun jika ini nyata, data sensitif Anda sudah dicuri.
+                    </p>
+
+                    @if($submission)
+                    <div class="mt-8 bg-black/20 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-2 h-2 rounded-full bg-red-400 animate-ping"></div>
+                            <span class="text-sm font-medium text-red-200">Data yang Dimasukkan</span>
+                        </div>
+                        <div class="font-mono text-sm text-red-100 opacity-75">
+                            {{ $submission->ip_address }} • {{ $submission->created_at->format('H:i:s') }}
+                        </div>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Right Side: Education & Action -->
+            <div class="p-8 lg:p-12 bg-slate-800">
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-2">Apa yang baru saja terjadi?</h2>
+                        <p class="text-slate-400">
+                            Anda mengklik tautan simulasi phishing dan memasukkan data. Teknik ini sering digunakan peretas untuk mencuri password, data bank, dan informasi pribadi.
                         </p>
                     </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Tanda Bahaya yang Terlewatkan</h3>
+
+                        <div class="grid gap-3">
+                            <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition-colors border border-slate-700">
+                                <span class="text-red-400 text-xl">🔍</span>
+                                <div>
+                                    <h4 class="font-medium text-slate-200">URL Palsu</h4>
+                                    <p class="text-sm text-slate-400">Alamat web terlihat mirip tapi berbeda dari aslinya.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition-colors border border-slate-700">
+                                <span class="text-yellow-400 text-xl">⚠️</span>
+                                <div>
+                                    <h4 class="font-medium text-slate-200">Desakan Waktu</h4>
+                                    <p class="text-sm text-slate-400">Email meminta tindakan segera ("Akun akan diblokir").</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if($submission)
+                    <div class="pt-4">
+                        <button onclick="acknowledgeAwareness({{ $submission->id }})"
+                            class="w-full group relative flex justify-center py-4 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-800 transition-all shadow-lg hover:shadow-blue-500/30">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-100 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            Saya Mengerti & Akan Lebih Waspada
+                        </button>
+                        <p id="ackMessage" class="text-center mt-3 text-sm h-5"></p>
+                    </div>
+                    @endif
                 </div>
-            </div>
-            @endif
-
-            <!-- Educational Content -->
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">🎓 Apa itu Phishing?</h2>
-                <p class="text-gray-600 mb-4">
-                    Phishing adalah teknik penipuan online di mana penyerang menyamar sebagai entitas tepercaya
-                    untuk mencuri informasi sensitif seperti username, password, dan data kartu kredit.
-                </p>
-            </div>
-
-            <!-- Warning Signs -->
-            <div class="bg-blue-50 rounded-lg p-6">
-                <h3 class="text-xl font-bold text-blue-900 mb-3">🔍 Tanda-tanda Phishing:</h3>
-                <ul class="space-y-2 text-blue-800">
-                    <li class="flex items-start">
-                        <span class="mr-2">✓</span>
-                        <span>URL yang mencurigakan atau tidak sesuai dengan website resmi</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">✓</span>
-                        <span>Email dari pengirim yang tidak dikenal atau alamat email aneh</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">✓</span>
-                        <span>Permintaan mendesak untuk memberikan informasi pribadi</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">✓</span>
-                        <span>Kesalahan tata bahasa atau ejaan yang buruk</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">✓</span>
-                        <span>Link yang mengarah ke website berbeda saat di-hover</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Protection Tips -->
-            <div class="bg-green-50 rounded-lg p-6">
-                <h3 class="text-xl font-bold text-green-900 mb-3">🛡️ Cara Melindungi Diri:</h3>
-                <ol class="space-y-2 text-green-800 list-decimal list-inside">
-                    <li>Selalu periksa URL website sebelum login</li>
-                    <li>Jangan klik link mencurigakan dari email/SMS</li>
-                    <li>Aktifkan Two-Factor Authentication (2FA)</li>
-                    <li>Gunakan password manager untuk password yang unik</li>
-                    <li>Update software dan browser secara berkala</li>
-                    <li>Hubungi perusahaan langsung jika ragu dengan email mereka</li>
-                </ol>
-            </div>
-
-            <!-- Statistics (if available) -->
-            @if($submission)
-            <div class="bg-gray-50 rounded-lg p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-3">📊 Informasi Simulasi:</h3>
-                <div class="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                        <span class="text-gray-600">Email Target:</span>
-                        <p class="font-semibold text-gray-900">{{ $identifier }}</p>
-                    </div>
-                    <div>
-                        <span class="text-gray-600">Waktu Submit:</span>
-                        <p class="font-semibold text-gray-900">{{ $submission->created_at->format('d/m/Y H:i') }}</p>
-                    </div>
-                    <div>
-                        <span class="text-gray-600">Template:</span>
-                        <p class="font-semibold text-gray-900">{{ $submission->formTemplate->name }}</p>
-                    </div>
-                    <div>
-                        <span class="text-gray-600">IP Address:</span>
-                        <p class="font-semibold text-gray-900">{{ $submission->ip_address }}</p>
-                    </div>
-                </div>
-            </div>
-            @endif
-
-            <!-- Acknowledgment Button -->
-            @if($submission)
-            <div class="text-center pt-4">
-                <button onclick="acknowledgeAwareness({{ $submission->id }})"
-                    class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-600 transition-all transform hover:scale-105 shadow-lg">
-                    ✓ Saya Mengerti dan Akan Lebih Waspada
-                </button>
-                <p class="text-sm text-gray-500 mt-3" id="ackMessage"></p>
-            </div>
-            @endif
-
-            <!-- Footer -->
-            <div class="text-center text-sm text-gray-500 pt-6 border-t">
-                <p>Simulasi ini dibuat untuk tujuan edukasi keamanan siber.</p>
-                <p class="mt-1">Data Anda telah dienkripsi dan hanya digunakan untuk analisis internal.</p>
             </div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script>
         function acknowledgeAwareness(submissionId) {
-            fetch(`/phishing/acknowledge/${submissionId}`, {
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+
+            // Loading state
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memproses...';
+
+            fetch(`/account-security/safety-check/${submissionId}`, { // Updated route
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    // No CSRF token needed as per exclusion, but harmless to include if present
                 }
             })
             .then(response => response.json())
             .then(data => {
-                const btn = event.target;
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-                btn.innerHTML = '✓ Terima Kasih!';
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                btn.classList.add('bg-green-600', 'cursor-default');
+                btn.innerHTML = '✓ Terima Kasih atas Partisipasi Anda';
 
-                document.getElementById('ackMessage').innerHTML =
-                    '<span class="text-green-600 font-semibold">' + data.message + '</span>';
+                const msg = document.getElementById('ackMessage');
+                msg.innerHTML = '<span class="text-green-400 font-medium tracking-wide">Edukasi Selesai. Anda aman.</span>';
+
+                // Optional: confetti or visual celebration could go here
 
                 setTimeout(() => {
-                    window.close();
-                }, 3000);
+                    // window.close(); // Often blocked by browsers
+                    // Instead, redirect to a safe page or show generic success
+                }, 2000);
             })
             .catch(error => {
                 console.error('Error:', error);
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
                 document.getElementById('ackMessage').innerHTML =
-                    '<span class="text-red-600">Terjadi kesalahan. Silakan coba lagi.</span>';
+                    '<span class="text-red-400">Gagal memproses. Silakan coba lagi.</span>';
             });
         }
     </script>
 </body>
-
 </html>

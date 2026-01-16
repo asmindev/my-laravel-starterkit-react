@@ -41,7 +41,7 @@ class FormTemplateController extends Controller
             ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
-        return Inertia::render('form-templates/index', [
+        return Inertia::render('form-templates/page', [
             'templates' => $templates,
             'filters' => $request->only(['search', 'status', 'sort', 'direction']),
         ]);
