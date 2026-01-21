@@ -126,3 +126,55 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Quill Editor Custom Styles */
+.quill-wrapper .ql-container {
+    font-family: inherit;
+    font-size: 0.875rem;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    border-color: var(--border);
+    min-height: 200px;
+}
+
+.quill-wrapper .ql-toolbar {
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    border-color: var(--border);
+    background-color: var(--muted);
+}
+
+.quill-wrapper .ql-editor {
+    min-height: 200px;
+}
+
+.quill-wrapper .ql-editor.ql-blank::before {
+    color: var(--muted-foreground);
+    font-style: normal;
+}
+
+.dark .quill-wrapper .ql-toolbar {
+    background-color: var(--card);
+}
+
+.dark .quill-wrapper .ql-stroke {
+    stroke: var(--foreground);
+}
+
+.dark .quill-wrapper .ql-fill {
+    fill: var(--foreground);
+}
+
+.dark .quill-wrapper .ql-picker-label {
+    color: var(--foreground);
+}
+
+.dark .quill-wrapper .ql-picker-options {
+    background-color: var(--popover);
+    border-color: var(--border);
+}
+
+.dark .quill-wrapper .ql-editor {
+    background-color: var(--background);
+    color: var(--foreground);
+}

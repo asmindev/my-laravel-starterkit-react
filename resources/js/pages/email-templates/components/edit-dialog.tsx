@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { QuillEditor } from '@/components/ui/quill-editor';
 import type { EmailTemplate } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { useEffect } from 'react';
@@ -76,13 +76,11 @@ export default function EditDialog({ open, onOpenChange, template }: Props) {
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="edit-body">Body HTML *</Label>
-                            <Textarea
+                            <QuillEditor
                                 id="edit-body"
                                 value={form.data.html_body}
-                                onChange={(e) => form.setData('html_body', e.target.value)}
-                                rows={12}
-                                className="font-mono text-sm"
-                                required
+                                onChange={(value) => form.setData('html_body', value)}
+                                placeholder="Tulis konten email di sini..."
                             />
                             {form.errors.html_body && <p className="text-sm text-destructive">{form.errors.html_body}</p>}
                         </div>
