@@ -45,7 +45,7 @@ export default function EditDialog({ open, onOpenChange, template }: Props) {
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-3xl">
+            <DialogContent className="min-w-3xl">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
                         <DialogTitle>Edit Template Email</DialogTitle>
