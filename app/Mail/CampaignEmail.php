@@ -8,6 +8,7 @@ use App\Models\Recipient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class CampaignEmail extends Mailable
 {
@@ -50,7 +51,11 @@ class CampaignEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->campaign->template->subject)
+        $fromName = $this->campaign->template->from_name ?: config('mail.from.name');
+        $fromAddress = config('mail.from.address');
+
+        return $this->from($fromAddress, $fromName)
+            ->subject($this->campaign->template->subject)
             ->html($this->processedHtml);
     }
 
@@ -63,7 +68,7 @@ class CampaignEmail extends Mailable
 
         // Validate we have required data for tracking URL
         if (! $this->recipient || ! $this->recipient->id) {
-            \Log::error('Recipient missing in CampaignEmail', [
+            Log::error('Recipient missing in CampaignEmail', [
                 'campaign_id' => $this->campaign->id ?? null,
                 'recipient' => $this->recipient ?? null,
             ]);
@@ -72,7 +77,7 @@ class CampaignEmail extends Mailable
         }
 
         // Debug logging before route generation
-        \Log::info('Generating tracking URL', [
+        Log::info('Generating tracking URL', [
             'campaign_id' => $this->campaign->id,
             'campaign_type' => get_class($this->campaign),
             'recipient_id' => $this->recipient->id,
@@ -84,9 +89,9 @@ class CampaignEmail extends Mailable
             // Generate tracking click URL using direct URL (bypass route model binding)
             $trackingUrl = url("track/click/{$this->campaign->id}/{$this->recipient->id}");
 
-            \Log::info('Tracking URL generated successfully', ['url' => $trackingUrl]);
+            Log::info('Tracking URL generated successfully', ['url' => $trackingUrl]);
         } catch (\Exception $e) {
-            \Log::error('Failed to generate tracking URL', [
+            Log::error('Failed to generate tracking URL', [
                 'error' => $e->getMessage(),
                 'campaign_id' => $this->campaign->id,
                 'recipient_id' => $this->recipient->id,

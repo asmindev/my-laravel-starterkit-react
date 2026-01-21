@@ -6,7 +6,9 @@ use App\Mail\CampaignEmail;
 use App\Models\Campaign;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SendCampaignJob implements ShouldQueue
 {
@@ -52,7 +54,7 @@ class SendCampaignJob implements ShouldQueue
             // Generate tracking token if not exists (for phishing form tracking)
             if (! $campaignRecipient->tracking_token) {
                 $campaignRecipient->update([
-                    'tracking_token' => \Str::random(32),
+                    'tracking_token' => Str::random(32),
                 ]);
                 $campaignRecipient->refresh();
             }
@@ -74,7 +76,7 @@ class SendCampaignJob implements ShouldQueue
                 ]);
             } catch (\Exception $e) {
                 // Log error but continue with other recipients
-                \Log::error('Failed to send campaign email', [
+                Log::error('Failed to send campaign email', [
                     'campaign_id' => $this->campaign->id,
                     'recipient_id' => $recipient->id,
                     'error' => $e->getMessage(),

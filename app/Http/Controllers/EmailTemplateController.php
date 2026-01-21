@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
@@ -37,6 +38,7 @@ class EmailTemplateController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'subject' => 'required|string|max:255',
+            'from_name' => 'nullable|string|max:255',
             'html_body' => 'required|string',
         ]);
 
@@ -53,6 +55,7 @@ class EmailTemplateController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'subject' => 'required|string|max:255',
+            'from_name' => 'nullable|string|max:255',
             'html_body' => 'required|string',
         ]);
 
@@ -79,10 +82,23 @@ class EmailTemplateController extends Controller
         $validated = $request->validate([
             'email' => 'required|email',
         ]);
+        Log::info('Preparing to send test email', [
+            'template_id' => $emailTemplate->id,
+            'to_email' => $validated['email'],
+            'from_name' => $emailTemplate->from_name,
+        ]);
 
-        Mail::send([], [], function ($message) use ($emailTemplate, $validated) {
+        $fromName = $emailTemplate->from_name ?: config('mail.from.name');
+        Log::info('Sending test email from template', [
+            'template_id' => $emailTemplate->id,
+            'to_email' => $validated['email'],
+            'from_name' => $fromName,
+        ]);
+
+        Mail::send([], [], function ($message) use ($emailTemplate, $validated, $fromName) {
             $message->to($validated['email'])
-                ->subject('[TEST] '.$emailTemplate->subject)
+                ->from(config('mail.from.address'), $fromName)
+                ->subject('[TEST] ' . $emailTemplate->subject)
                 ->html($emailTemplate->html_body);
         });
 

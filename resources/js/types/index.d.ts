@@ -33,6 +33,7 @@ export interface EmailTemplate {
     id: number;
     name: string;
     subject: string;
+    from_name: string | null;
     html_body: string;
     created_at: string;
     updated_at: string;

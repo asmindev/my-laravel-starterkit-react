@@ -15,6 +15,7 @@ export default function CreateDialog({ open, onOpenChange }: Props) {
     const form = useForm({
         name: '',
         subject: '',
+        from_name: '',
         html_body: '',
     });
 
@@ -58,6 +59,17 @@ export default function CreateDialog({ open, onOpenChange }: Props) {
                                 required
                             />
                             {form.errors.subject && <p className="text-sm text-destructive">{form.errors.subject}</p>}
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="create-from-name">Nama Pengirim</Label>
+                            <Input
+                                id="create-from-name"
+                                type="text"
+                                value={form.data.from_name}
+                                onChange={(e) => form.setData('from_name', e.target.value)}
+                                placeholder="Nama yang tampil sebagai pengirim"
+                            />
+                            {form.errors.from_name && <p className="text-sm text-destructive">{form.errors.from_name}</p>}
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="create-body">Body HTML *</Label>

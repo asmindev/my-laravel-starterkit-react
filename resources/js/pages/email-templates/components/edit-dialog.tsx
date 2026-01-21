@@ -18,6 +18,7 @@ export default function EditDialog({ open, onOpenChange, template }: Props) {
     const form = useForm({
         name: '',
         subject: '',
+        from_name: '',
         html_body: '',
     });
 
@@ -26,6 +27,7 @@ export default function EditDialog({ open, onOpenChange, template }: Props) {
             form.setData({
                 name: template.name,
                 subject: template.subject,
+                from_name: template.from_name || '',
                 html_body: template.html_body,
             });
         }
@@ -73,6 +75,17 @@ export default function EditDialog({ open, onOpenChange, template }: Props) {
                                 required
                             />
                             {form.errors.subject && <p className="text-sm text-destructive">{form.errors.subject}</p>}
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="edit-from-name">Nama Pengirim</Label>
+                            <Input
+                                id="edit-from-name"
+                                type="text"
+                                value={form.data.from_name}
+                                onChange={(e) => form.setData('from_name', e.target.value)}
+                                placeholder="Nama yang tampil sebagai pengirim"
+                            />
+                            {form.errors.from_name && <p className="text-sm text-destructive">{form.errors.from_name}</p>}
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="edit-body">Body HTML *</Label>
