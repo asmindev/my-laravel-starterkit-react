@@ -314,11 +314,6 @@ class CampaignController extends Controller
 
     public function destroy(Campaign $campaign)
     {
-        // Only allow deleting draft campaigns
-        if ($campaign->status !== 'draft') {
-            return back()->with('error', 'Cannot delete campaign that is scheduled or sent.');
-        }
-
         $campaign->delete();
 
         return redirect()->route('campaigns.index')

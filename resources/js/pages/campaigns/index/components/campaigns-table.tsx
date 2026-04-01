@@ -167,10 +167,6 @@ export default function CampaignsTable({ campaigns }: Props) {
                                                             <Send className="mr-2 h-4 w-4" />
                                                             Kirim Sekarang
                                                         </DropdownMenuItem>
-                                                        <DropdownMenuItem onClick={() => openDeleteDialog(campaign.id)} className="text-destructive">
-                                                            <Trash2 className="mr-2 h-4 w-4" />
-                                                            Hapus
-                                                        </DropdownMenuItem>
                                                     </>
                                                 )}
                                                 {campaign.status === 'scheduled' && (
@@ -179,6 +175,10 @@ export default function CampaignsTable({ campaigns }: Props) {
                                                         Batalkan
                                                     </DropdownMenuItem>
                                                 )}
+                                                <DropdownMenuItem onClick={() => openDeleteDialog(campaign.id)} className="text-destructive">
+                                                    <Trash2 className="mr-2 h-4 w-4" />
+                                                    Hapus
+                                                </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>
