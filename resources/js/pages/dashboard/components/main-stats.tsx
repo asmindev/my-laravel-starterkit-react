@@ -17,7 +17,7 @@ export default function MainStats({ stats, campaignStats }: Props) {
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{stats.total_recipients}</div>
-                    <p className="text-xs text-muted-foreground">{stats.subscribed_recipients} berlangganan</p>
+                    <p className="text-xs text-muted-foreground">{stats.subscribed_recipients} penerima</p>
                 </CardContent>
             </Card>
             <Card>

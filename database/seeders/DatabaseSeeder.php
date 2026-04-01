@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@kominfo.com',
             'password' => bcrypt('password'),
         ]);
+
+        $this->call([
+            CampaignPerformanceSeeder::class,
+        ]);
     }
 }
