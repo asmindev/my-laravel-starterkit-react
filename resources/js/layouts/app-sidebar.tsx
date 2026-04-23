@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-import { CreditCard, FileText, FolderTree, GalleryVerticalEnd, LayoutDashboard, Shield, Users } from 'lucide-react';
+import { CreditCard, FileText, FolderTree, LayoutDashboard, Shield, Users } from 'lucide-react';
 
 import { NavUser } from '@/components/nav-user';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -132,14 +132,20 @@ export function AppSidebar({ activePath }: AdminSidebarProps) {
         <Sidebar collapsible="icon">
             <SidebarHeader>
                 {state === 'collapsed' ? (
-                    <div className="flex justify-center rounded-md border bg-primary py-1">
-                        <GalleryVerticalEnd className="size-5 text-primary-foreground" strokeWidth={1.5} />
+                    <div className="flex justify-center rounded-md border bg-background py-1">
+                        <img
+                            src="https://iconlogovector.com/uploads/images/2024/04/lg-66110283154da-KOMINFO.webp"
+                            className="size-5 text-primary-foreground"
+                        />
                     </div>
                 ) : (
                     <div className="flex items-center justify-between gap-3 rounded-lg border border-primary/50 bg-primary px-3 py-2 shadow-sm">
                         <div className="flex items-center gap-3 text-primary-foreground">
-                            <div className="flex size-10 items-center justify-center rounded-xl border border-background/20">
-                                <GalleryVerticalEnd className="size-5" />
+                            <div className="flex size-10 items-center justify-center rounded-xl border border-background/20 bg-background">
+                                <img
+                                    src="https://iconlogovector.com/uploads/images/2024/04/lg-66110283154da-KOMINFO.webp"
+                                    className="size-8 text-primary-foreground"
+                                />
                             </div>
                             <div>
                                 <p className="text-sm font-semibold">{name}</p>
